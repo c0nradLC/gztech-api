@@ -18,6 +18,7 @@ export class createDevs1640538842327 implements MigrationInterface {
                   {
                     name: 'nivel',
                     type: 'int',
+                    isNullable: false,
                   },
                   {
                     name: 'nome',

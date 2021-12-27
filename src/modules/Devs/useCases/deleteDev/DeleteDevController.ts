@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { DeleteNivelUseCase } from "./DeleteNivelUseCase";
+import { DeleteDevUseCase } from "./DeleteDevUseCase";
 
-class DeleteNivelController {
+class DeleteDevController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { id } = request.body;
@@ -11,12 +11,12 @@ class DeleteNivelController {
             return response.status(400).send("'id' expected");    
         }
 
-        const deleteNivelUseCase = container.resolve(DeleteNivelUseCase);
+        const deleteDevUseCase = container.resolve(DeleteDevUseCase);
 
-        await deleteNivelUseCase.execute(Number(id));
+        await deleteDevUseCase.execute(Number(id));
 
         return response.status(204).send();
     }
 }
 
-export { DeleteNivelController }
+export { DeleteDevController }
