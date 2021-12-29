@@ -9,7 +9,7 @@ class NiveisController {
         } = request.body;
 
         if (!nivel) {
-            return response.status(400).send("'nivel' expected");    
+            return response.status(400).send("Campo 'Nível' esperado");    
         }
     
         const niveisUseCase = container.resolve(NiveisUseCase);

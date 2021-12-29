@@ -5,15 +5,15 @@ import { DeleteNivelUseCase } from "./DeleteNivelUseCase";
 class DeleteNivelController {
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { id } = request.body;
+        const { nivelId } = request.params;
 
-        if (!id) {
-            return response.status(400).send("'id' expected");    
+        if (!nivelId) {
+            return response.status(400).send("Campo 'nivelId' esperado!");    
         }
 
         const deleteNivelUseCase = container.resolve(DeleteNivelUseCase);
 
-        await deleteNivelUseCase.execute(Number(id));
+        await deleteNivelUseCase.execute(Number(nivelId));
 
         return response.status(204).send();
     }
