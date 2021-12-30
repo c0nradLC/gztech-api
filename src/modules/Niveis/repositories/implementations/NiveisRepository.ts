@@ -2,6 +2,7 @@ import { INiveisDTO } from "../../dtos/INiveisDTO";
 import { Niveis } from "../../entities/Niveis";
 import { getRepository, Repository } from "typeorm";
 import { INiveisRepository } from "../INiveisRepository";
+import { INiveisResponseDTO } from "../../dtos/INiveisResponseDTO";
 
 class NiveisRepository implements INiveisRepository {
     private repository: Repository<Niveis>;
@@ -51,6 +52,21 @@ class NiveisRepository implements INiveisRepository {
         .getMany();
         
         return niveis;
+    }
+
+    async list(search: string, page: number, pageSize: number): Promise<INiveisResponseDTO> {
+      console.log(search);
+      const query = await this.repository.createQueryBuilder('niveis')
+        .where(`niveis.nivel LIKE '%${search}%'`);
+
+      query.skip(pageSize * (page - 1)).take(pageSize);
+      const total = await query.getCount();
+      const niveis = await query.getMany();
+
+      return {
+        total,
+        niveis
+      }
     }
   }
   

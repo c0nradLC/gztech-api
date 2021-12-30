@@ -4,10 +4,16 @@ import { ListNiveisUseCase } from "./ListNiveisUseCase";
 
 class ListNiveisController {
   async handle(request: Request, response: Response): Promise<Response> {
-  
+    const page = Number(request.query.page) || 1;
+    const size = Number(request.query.size) || 10;
+    const search = request.query.search || '';
+
+    console.log(page);
+    console.log(size);
+
     const listNiveisUseCase = container.resolve(ListNiveisUseCase);
 
-    const niveis = await listNiveisUseCase.execute();
+    const niveis = await listNiveisUseCase.execute(search.toString(), page, size);
 
     return response.status(200).send(niveis);
   }

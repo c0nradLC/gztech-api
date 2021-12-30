@@ -1,5 +1,6 @@
 import { INiveisDTO } from '../dtos/INiveisDTO';
 import { Niveis } from '../entities/Niveis';
+import { INiveisResponseDTO } from '../dtos/INiveisResponseDTO';
 
 interface INiveisRepository {
     create(data: INiveisDTO): Promise<void>;
@@ -7,6 +8,7 @@ interface INiveisRepository {
     deleteById(nivelId: number): Promise<INiveisDTO>;
     getById(nivelId: number): Promise<INiveisDTO>;
     getAll(): Promise<INiveisDTO[]>;
+    list(search: string, page: number, pageSize: number): Promise<INiveisResponseDTO>;
 }
 
 export { INiveisRepository };

@@ -1,8 +1,7 @@
 import { INiveisRepository } from "../../repositories/INiveisRepository";
 import { inject, injectable } from 'tsyringe';
 
-import { INiveisDTO } from '../../dtos/INiveisDTO';
-import { IDevsRepository } from "../../../Devs/repositories/IDevsRepository";
+import { INiveisResponseDTO } from '../../dtos/INiveisResponseDTO';
 
 import '../../../../shared/extensions/ToNiveisDTO';
 
@@ -10,15 +9,15 @@ import '../../../../shared/extensions/ToNiveisDTO';
 class ListNiveisUseCase {
     constructor(
         @inject('NiveisRepository')
-        private niveisRepository: INiveisRepository,
-        @inject('DevsRepository')
-        private devsRepository: IDevsRepository
+        private niveisRepository: INiveisRepository
     ) {}
 
-    async execute(): Promise<INiveisDTO[]> {
-        const niveis = await this.niveisRepository.getAll();
+    async execute(search: string, page: number, pageSize: number): Promise<INiveisResponseDTO> {
+        const niveis = await this.niveisRepository.list(search, page, pageSize);
 
-        return niveis.ToNiveisDTO();
+        niveis.niveis = await niveis.niveis.ToNiveisDTO();
+
+        return niveis;
     }
 }
 
