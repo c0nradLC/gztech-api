@@ -1,6 +1,8 @@
+import { Niveis } from "../../Niveis/entities/Niveis";
+
 interface IDevsDTO {
     id?: number;
-    nivel: number;
+    nivel: Niveis;
     nome: string;
     sexo: string;
     datanascimento: Date;

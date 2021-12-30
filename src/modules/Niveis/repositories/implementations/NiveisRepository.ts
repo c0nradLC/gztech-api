@@ -20,7 +20,7 @@ class NiveisRepository implements INiveisRepository {
 
     async update(data: INiveisDTO): Promise<Niveis> {
       const nivel = this.repository.create({
-        id: data.id,
+        id: Number(data.id),
         nivel: data.nivel,
       });
   
@@ -29,8 +29,13 @@ class NiveisRepository implements INiveisRepository {
       return updatedNivel;
     }
 
-    async deleteById(nivelId: number): Promise<void> {
+    async deleteById(nivelId: number): Promise<INiveisDTO> {
+
+      const nivel = this.getById(nivelId);
+
       await this.repository.delete(nivelId);
+
+      return nivel;
     }
   
     async getById(nivelId: number): Promise<INiveisDTO> {
@@ -44,7 +49,7 @@ class NiveisRepository implements INiveisRepository {
     async getAll(): Promise<INiveisDTO[]> {
         const niveis = await this.repository.createQueryBuilder('niveis')
         .getMany();
-
+        
         return niveis;
     }
   }

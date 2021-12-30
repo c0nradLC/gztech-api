@@ -15,18 +15,14 @@ class UpdateDevController {
         hobby
       } = request.body;
   
-      if (!id) {
-        return response.status(400).send("'id' expected");    
-      }
-
-      if (!nivel || nivel == 0) {
-        return response.status(400).send("'nivel' expected");    
+      if (!id || !Number(id) || !nivel || !nome || !sexo || !datanascimento || !idade || !hobby) {
+        return response.status(400).send("Preencha todos os campos!");    
       }
 
       const updateDevUseCase = container.resolve(UpdateDevUseCase);
   
       const updatedDev = await updateDevUseCase.execute({
-        id: id,
+        id: Number(id),
         nivel: nivel,
         nome: nome,
         sexo: sexo,

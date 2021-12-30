@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 
 import { Niveis } from '../../Niveis/entities/Niveis';
 
@@ -7,8 +7,8 @@ export class Devs {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @ManyToOne(() => Niveis)
-    @Column()
+    @ManyToOne(() => Niveis, nivel => nivel.id)
+    @JoinColumn({ name: "nivelId" })
     nivel: number;
 
     @Column()

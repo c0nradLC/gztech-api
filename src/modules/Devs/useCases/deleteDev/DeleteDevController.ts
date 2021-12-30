@@ -5,15 +5,15 @@ import { DeleteDevUseCase } from "./DeleteDevUseCase";
 class DeleteDevController {
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { id } = request.body;
+        const { devId } = request.params;
 
-        if (!id) {
-            return response.status(400).send("'id' expected");    
+        if (!devId) {
+            return response.status(400).send("'devId' expected");    
         }
 
         const deleteDevUseCase = container.resolve(DeleteDevUseCase);
 
-        await deleteDevUseCase.execute(Number(id));
+        await deleteDevUseCase.execute(Number(devId));
 
         return response.status(204).send();
     }

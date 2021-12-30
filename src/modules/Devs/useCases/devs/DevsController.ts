@@ -5,7 +5,7 @@ import { DevsUseCase } from "./DevsUseCase";
 class DevsController {
     async handle(request: Request, response: Response): Promise<Response> {
         const {
-            nivel,
+            nivelId,
             nome,
             sexo,
             datanascimento,
@@ -13,18 +13,14 @@ class DevsController {
             hobby,
         } = request.body;
 
-        if (!nome) {
-            return response.status(400).send("'nome' expected");    
-        }
-
-        if (!nivel || nivel == 0) {
-            return response.status(400).send("'nivel' expected");    
+        if (!nome || !nivelId || nivelId == 0 || !sexo || !datanascimento || !idade || !hobby) {
+            return response.status(400).send("Preencha todos os campos");    
         }
     
         const devsUseCase = container.resolve(DevsUseCase);
     
         await devsUseCase.execute({
-            nivel: nivel,
+            nivel: nivelId,
             nome: nome,
             sexo: sexo,
             datanascimento: datanascimento,

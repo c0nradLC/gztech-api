@@ -13,9 +13,13 @@ class DeleteNivelController {
 
         const deleteNivelUseCase = container.resolve(DeleteNivelUseCase);
 
-        await deleteNivelUseCase.execute(Number(nivelId));
-
-        return response.status(204).send();
+        await deleteNivelUseCase.execute(Number(nivelId))
+        .then(() => {
+            return response.status(204).send();
+        })
+        .catch((res) => {
+            return response.status(res.statusCode).send(res.message);
+        });
     }
 }
 

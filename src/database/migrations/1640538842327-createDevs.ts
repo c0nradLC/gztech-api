@@ -16,7 +16,7 @@ export class createDevs1640538842327 implements MigrationInterface {
                     generationStrategy: 'increment',
                   },
                   {
-                    name: 'nivel',
+                    name: 'nivelId',
                     type: 'int',
                     isNullable: false,
                   },

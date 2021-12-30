@@ -10,22 +10,25 @@ class UpdateNivelController {
         nivel
       } = request.body;
   
-      if (!id) {
-        return response.status(400).send("'id' expected");    
+      if (!id || !Number(id)) {
+        return response.status(400).send("Campo 'id' esperado");    
       }
 
       if (!nivel || nivel === '') {
-        return response.status(400).send("'nivel' expected");    
+        return response.status(400).send("Campo 'nível' esperado");    
       }
 
       const updateNivelUseCase = container.resolve(UpdateNivelUseCase);
   
-      const updatedNivel = await updateNivelUseCase.execute({
+      await updateNivelUseCase.execute({
         id: id,
         nivel: nivel,
+      })
+      .catch((res) => {
+        return response.status(res.statusCode).send(res.message);
       });
-  
-      return response.status(200).json(updatedNivel);
+
+      return response.status(200).send();
     }
 }
   
