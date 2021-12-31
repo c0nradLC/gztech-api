@@ -8,9 +8,6 @@ class ListNiveisController {
     const size = Number(request.query.size) || 10;
     const search = request.query.search || '';
 
-    console.log(page);
-    console.log(size);
-
     const listNiveisUseCase = container.resolve(ListNiveisUseCase);
 
     const niveis = await listNiveisUseCase.execute(search.toString(), page, size);

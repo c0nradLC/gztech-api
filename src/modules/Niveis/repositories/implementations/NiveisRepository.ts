@@ -55,7 +55,6 @@ class NiveisRepository implements INiveisRepository {
     }
 
     async list(search: string, page: number, pageSize: number): Promise<INiveisResponseDTO> {
-      console.log(search);
       const query = await this.repository.createQueryBuilder('niveis')
         .where(`niveis.nivel LIKE '%${search}%'`);
 

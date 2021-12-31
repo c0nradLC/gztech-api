@@ -4,13 +4,16 @@ import { ListDevsUseCase } from "./ListDevsUseCase";
 
 class ListDevsController {
     async handle(request: Request, response: Response): Promise<Response> {
-    
-        const listDevsUseCase = container.resolve(ListDevsUseCase);
-    
-        const devs = await listDevsUseCase.execute();
-    
-        return response.status(200).send(devs);
-      }
+      const page = Number(request.query.page) || 1;
+      const size = Number(request.query.size) || 10;
+      const search = request.query.search || '';
+
+      const listDevsUseCase = container.resolve(ListDevsUseCase);
+  
+      const devs = await listDevsUseCase.execute(search.toString(), page, size);
+  
+      return response.status(200).send(devs);
+    }
 }
 
 export { ListDevsController }
