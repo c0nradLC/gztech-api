@@ -10,7 +10,7 @@ Para executar o container da API, utilizaremos docker-compose, caso o usuário l
 ~~~
 docker-compose up
 ~~~
-Caso tudo tenha ocorrido como esperado, uma das últimas linhas que aparecerá no terminal será mais ou menos assim 
+Caso tudo tenha ocorrido como esperado, uma das últimas linhas que aparecerá no terminal será 
 `server        | Server running`
 
 Após o container estar ativo e funcionando, podemos acessar a API pela URL: `http://localhost:3333/`, onde teremos na tela: `{"message":"Server running!"}`, também poderemos cadastrar, editar, remover e listar os níveis e desenvolvedores pelo front-end
