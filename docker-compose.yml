@@ -15,15 +15,27 @@ services:
     links:
       - mysql
     
-  phpmyadmin:
-    extends:
-      file: ../docker-compose.yml
-      service: phpmyadmin
-
   mysql:
-    extends:
-      file: ../docker-compose.yml
-      service: mysql
+    restart: always
+    image: 'mysql:5.7'
+    ports:
+      - '3306:3306'
+    container_name: database
+    environment:
+      MYSQL_ROOT_PASSWORD: 'gztech'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./.docker/mysql/data:/var/lib/mysql
+      - ./.docker/mysql:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping"]
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8090:80"
+    environment:
+      - PMA_HOST=mysql
   
 volumes:
   gztech-mysql:
