@@ -14,3 +14,5 @@ Caso tudo tenha ocorrido como esperado, uma das últimas linhas que aparecerá n
 `server        | Server running`
 
 Após o container estar ativo e funcionando, podemos acessar a API pela URL: `http://localhost:3333/`, onde teremos na tela: `{"message":"Server running!"}`, também poderemos cadastrar, editar, remover e listar os níveis e desenvolvedores pelo front-end
+
+Caso deseje visualizar o banco de dados, é possível acessar o phpMyAdmin pela URL: `http://localhost:8090` selecionando o banco de dados `gztech`
